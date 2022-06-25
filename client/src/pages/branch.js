@@ -1,8 +1,9 @@
 import React from "react";
 import courses from "../constants/Courses";
+import Course from "../components/Course";
 
 function createCourse(course) {
-  return <li>{course}</li>;
+  return <Course cName={course.name} cId={course.id} />;
 }
 
 const Branch = (props) => {

@@ -89,8 +89,8 @@ deletePaper = async (req, res) => {
   }).catch((err) => console.log(err));
 };
 
-getPaperById = async (req, res) => {
-  await Paper.findOne({ _id: req.params.id }, (err, paper) => {
+getPapersByCid = async (req, res) => {
+  await Paper.find({ cId: req.params.cId }, (err, paper) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
@@ -119,5 +119,5 @@ module.exports = {
   updatePaper,
   deletePaper,
   getPapers,
-  getPaperById,
+  getPapersByCid,
 };
