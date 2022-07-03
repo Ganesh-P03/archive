@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages";
 import Branch from "./pages/branch";
+import Admin from "./pages/admin";
 import departments from "./constants/departments";
 import cIds from "./constants/cIds";
 import CourseById from "./pages/course";
@@ -22,6 +23,7 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/admin" element={<Admin />} />
           {departments.map(createRouteDepartment)}
           {cIds.map(createRouteCid)}
         </Routes>
