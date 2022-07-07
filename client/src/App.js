@@ -6,6 +6,7 @@ import Admin from "./pages/admin";
 import departments from "./constants/departments";
 import cIds from "./constants/cIds";
 import CourseById from "./pages/course";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function createRouteDepartment(department) {
   return (

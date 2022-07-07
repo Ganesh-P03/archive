@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import api from "../api";
 import { storage } from "../storage/base";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { Form } from "react-bootstrap";
 
 import styled from "styled-components";
 
@@ -65,12 +66,6 @@ const PaperInsert = () => {
 
     await api.insertPaper(payload).then((res) => {
       window.alert(` inserted successfully`);
-      setCName(null);
-      setCId(null);
-      setYear(null);
-      setUrl(null);
-      setFName(null);
-      setTopics(null);
     });
   };
 
@@ -78,70 +73,109 @@ const PaperInsert = () => {
     <Wrapper>
       <Title>Upload to Archive!!</Title>
 
-      <Label>Course Name: </Label>
-      <InputText
-        type="text"
-        value={cName}
-        onChange={(e) => {
-          setCName(e.target.value);
+      <div
+        style={{
+          width: "70%",
+          marginTop: "60px",
+          marginLeft: "auto",
+          marginRight: "auto",
+
+          border: "2px solid black",
+          padding: "20px",
         }}
-      />
+      >
+        <Form>
+          <Form.Group className="mb-3">
+            <Form.Label>Course Name</Form.Label>
+            <Form.Control
+              type="text"
+              value={cName}
+              onChange={(e) => {
+                setCName(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-      <br></br>
+          <Form.Group className="mb-3">
+            <Form.Label>Course Id</Form.Label>
+            <Form.Control
+              type="text"
+              value={cId}
+              onChange={(e) => {
+                setCId(e.target.value);
+              }}
+            />
+            <Form.Text className="text-muted">
+              Please make sure it matches with the record!
+            </Form.Text>
+          </Form.Group>
 
-      <Label>Course Id: </Label>
-      <InputText
-        type="text"
-        value={cId}
-        onChange={(e) => {
-          setCId(e.target.value);
-        }}
-      />
+          <Form.Group className="mb-3">
+            <Form.Label>Year</Form.Label>
+            <Form.Control
+              type="text"
+              value={year}
+              onChange={(e) => {
+                setYear(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-      <br></br>
+          <div className="form-group">
+            <input
+              type="file"
+              className="form-control-file"
+              id="exampleFormControlFile1"
+              onChange={handleChangeInputFile}
+            />
+          </div>
 
-      <Label>Year: </Label>
-      <InputText
-        type="text"
-        value={year}
-        onChange={(e) => {
-          setYear(e.target.value);
-        }}
-      />
-      <br></br>
+          <Form.Group className="mb-3">
+            <Form.Label>Url</Form.Label>
+            <Form.Control
+              disabled="true"
+              type="text"
+              value={url}
+              onChange={(e) => {
+                setUrl(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-      <input type="file" onChange={handleChangeInputFile} />
+          <Form.Group className="mb-3">
+            <Form.Label>File Name</Form.Label>
+            <Form.Control
+              type="text"
+              value={fName}
+              onChange={(e) => {
+                setFName(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-      <Label>url: </Label>
-      <InputText
-        type="text"
-        value={url}
-        onChange={(e) => {
-          setUrl(e.target.value);
-        }}
-      />
-      <br></br>
-      <Label>file Name: </Label>
-      <InputText
-        type="text"
-        value={fName}
-        onChange={(e) => {
-          setFName(e.target.value);
-        }}
-      />
-      <br></br>
-      <Label>Topics: </Label>
-      <InputText
-        type="text"
-        value={topics}
-        onChange={(e) => {
-          setTopics(e.target.value);
-        }}
-      />
-      <br></br>
+          <Form.Group className="mb-3">
+            <Form.Label>Topics</Form.Label>
+            <Form.Control
+              type="text"
+              value={topics}
+              onChange={(e) => {
+                setTopics(e.target.value);
+              }}
+            />
+          </Form.Group>
 
-      <Button onClick={handleIncludePaper}>Add Paper</Button>
-      {/* <CancelButton href={"/movies/list"}>Cancel</CancelButton> */}
+          <Form.Group className="mb-3">
+            <Form.Check
+              type="checkbox"
+              label="I verified that all are correct"
+            />
+          </Form.Group>
+
+          <Button variant="primary" onClick={handleIncludePaper}>
+            Submit
+          </Button>
+        </Form>
+      </div>
     </Wrapper>
   );
 };
