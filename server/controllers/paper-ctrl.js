@@ -1,5 +1,7 @@
 const Paper = require("../models/paper-model");
 
+
+// .save() returns a promise
 createPaper = (req, res) => {
   const body = req.body;
 
@@ -11,10 +13,6 @@ createPaper = (req, res) => {
   }
 
   const paper = new Paper(body);
-
-  if (!paper) {
-    return res.status(400).json({ success: false, error: err });
-  }
 
   paper
     .save()
@@ -33,13 +31,62 @@ createPaper = (req, res) => {
     });
 };
 
-updatePaper = async (req, res) => {
+//async-await syntax
+// updatePaper = async(req,res)=>{
+//   const body = req.body;
+//   if (!body) {
+//     return res.status(400).json({
+//       success: false,
+//       error: "You must provide a body of request to update",
+//     });
+//   }
+
+//   let paper;
+
+//   try{
+//     await paper.findOne({_id:req.params.id}).exec();
+
+//   }
+//   catch(err){
+//     return res.status(404).json({
+//       err,
+//       message: "Paper not found!",
+//     });
+//   }
+
+//   paper.cName = body.cName;
+//   paper.cId = body.cId;
+//   paper.year = body.year;
+//   paper.url = body.url;
+//   paper.fName = body.fName;
+//   paper.topics = body.topics;
+
+//   try{
+//     await paper.save();
+//     return res.status(200).json({
+//       success: true,
+//       id: paper._id,
+//       message: "Paper updated!",
+//     });
+//   }
+//   catch(err){
+//     return res.status(404).json({
+//       error,
+//       message: "Paper not updated!",
+//     });
+//   }
+
+// }
+
+
+//using callBack
+updatePaper =  (req, res) => {
   const body = req.body;
 
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: "You must provide a body to update",
+      error: "You must provide a body of request to update",
     });
   }
 
@@ -75,8 +122,10 @@ updatePaper = async (req, res) => {
   });
 };
 
-deletePaper = async (req, res) => {
-  await Paper.findOneAndDelete({ _id: req.params.id }, (err, paper) => {
+
+//using callBack
+deletePaper =  (req, res) => {
+   Paper.findOneAndDelete({ _id: req.params.id }, (err, paper) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
@@ -86,11 +135,15 @@ deletePaper = async (req, res) => {
     }
 
     return res.status(200).json({ success: true, data: paper });
-  }).catch((err) => console.log(err));
+  })
 };
 
-getPapersByCid = async (req, res) => {
-  await Paper.find({ cId: req.params.cId }, (err, paper) => {
+
+
+
+//using callBack
+getPapersByCid =  (req, res) => {
+   Paper.find({ cId: req.params.cId }, (err, paper) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
@@ -99,11 +152,12 @@ getPapersByCid = async (req, res) => {
       return res.status(404).json({ success: false, error: `Paper not found` });
     }
     return res.status(200).json({ success: true, data: paper });
-  }).catch((err) => console.log(err));
+  })
 };
 
-getPapers = async (req, res) => {
-  await Paper.find({}, (err, papers) => {
+//using callBack
+getPapers =  (req, res) => {
+  Paper.find({}, (err, papers) => {
     if (err) {
       return res.status(400).json({ success: false, error: err });
     }
@@ -111,7 +165,7 @@ getPapers = async (req, res) => {
       return res.status(404).json({ success: false, error: `Paper not found` });
     }
     return res.status(200).json({ success: true, data: papers });
-  }).catch((err) => console.log(err));
+  })
 };
 
 module.exports = {
