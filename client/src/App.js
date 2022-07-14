@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages";
 import Branch from "./pages/branch";
 import Admin from "./pages/admin";
+import Create from "./pages/create";
+import Delete from "./pages/delete";
+import Update from "./pages/update";
 import departments from "./constants/departments";
 import cIds from "./constants/cIds";
 import CourseById from "./pages/course";
@@ -25,6 +28,9 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/admin" element={<Admin />} />
+          <Route exact path="/create" element={<Create />} />
+          <Route exact path="/delete" element={<Delete />} />
+          <Route exact path="/update" element={<Update />} />
           {departments.map(createRouteDepartment)}
           {cIds.map(createRouteCid)}
         </Routes>

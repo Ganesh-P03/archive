@@ -97,6 +97,13 @@ updatePaper =  (req, res) => {
         message: "Paper not found!",
       });
     }
+
+    if(!paper){
+      return res.status(404).json({
+        sucess:false,
+        message:"paper not found and not updated"
+      })
+    }
     paper.cName = body.cName;
     paper.cId = body.cId;
     paper.year = body.year;

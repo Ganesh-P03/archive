@@ -54,7 +54,7 @@ const CourseById = (props) => {
               <li>{paper.year}</li>
 
               <li>
-                <a href={paper.url} target="_blank">
+                <a href={paper.url} target="_blank" rel="noreferrer">
                   {paper.fName}
                 </a>
               </li>
@@ -72,6 +72,7 @@ const CourseById = (props) => {
             </Button>
           </div>
         </div>
+        <span>{paper._id}</span>
       </div>
     );
   }
@@ -82,7 +83,7 @@ const CourseById = (props) => {
         <h1 style={{ textAlign: "center", margin: "20px" }}>
           Welcome to {props.cId}
         </h1>
-        <div>{status == 1 ? papers.map(createDisplay) : ""}</div>
+        <div>{status === 1 ? papers.map(createDisplay) : ""}</div>
       </div>
     </Layout>
   );
