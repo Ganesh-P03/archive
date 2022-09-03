@@ -1,6 +1,9 @@
 import React from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "react-bootstrap";
+import styled from "styled-components";
 const Course = (props) => {
   const navigate = useNavigate();
 
@@ -9,42 +12,37 @@ const Course = (props) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        margin: "20px",
-        border: "2px solid blue",
-        padding: "5px",
-        height: "50px",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        flexWrap: "wrap",
-      }}
-    >
-      <div style={{ flexGrow: "1", textAlign: "center", flexBasis: "0" }}>
-        {props.cId}
-      </div>
-      <div
-        style={{
-          textAlign: "center",
-          flexGrow: "2",
-          flexBasis: "0",
-        }}
-      >
-        <button
-          value={props.cId}
-          onClick={(e) => {
-            navigateToCid(e.target.value);
+    <tr>
+      <Td>{props.cId}</Td>
+
+      <Td>{props.cName}</Td>
+
+      <Td>
+        <FontAwesomeIcon
+          style={{ cursor: "pointer" }}
+          icon={faCircleInfo}
+          onClick={() => {
+            window.open(props.cLink, "_blank");
+          }}
+        />
+      </Td>
+
+      <Td>
+        <Button
+          onClick={() => {
+            navigateToCid(props.cId);
           }}
         >
-          {props.cName}
-        </button>
-      </div>
-      <div style={{ flexGrow: "1", flexBasis: "0", textAlign: "center" }}>
-        details
-      </div>
-    </div>
+          <FontAwesomeIcon icon={faEye} /> view question papers
+        </Button>
+      </Td>
+    </tr>
   );
 };
 
 export default Course;
+
+const Td = styled.td`
+  text-align: center;
+  vertical-align: baseline;
+`;

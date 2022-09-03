@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useParams,
+} from "react-router-dom";
 import Home from "./pages";
 import Branch from "./pages/branch";
 import Admin from "./pages/admin";
@@ -32,7 +37,9 @@ function App() {
           <Route exact path="/delete" element={<Delete />} />
           <Route exact path="/update" element={<Update />} />
           {departments.map(createRouteDepartment)}
-          {cIds.map(createRouteCid)}
+          <Route path="/:id" element={<CourseById />} />
+
+          {/* {cIds.map(createRouteCid)} */}
         </Routes>
       </Router>
     </div>

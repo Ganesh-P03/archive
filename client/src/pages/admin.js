@@ -9,7 +9,7 @@ const Admin = () => {
   };
 
   return (
-    <div>
+    <div style={{ margin: "20px" }}>
       <Button
         value="create"
         onClick={(e) => {
@@ -19,6 +19,8 @@ const Admin = () => {
         Create
       </Button>
       <br />
+      <br />
+      <br />
       <Button
         value="delete"
         onClick={(e) => {
@@ -27,6 +29,8 @@ const Admin = () => {
       >
         Delete
       </Button>
+      <br />
+      <br />
       <br />
       <Button
         value="update"
